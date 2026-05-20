@@ -1,3 +1,38 @@
+# 🎬 Movie Listing App
+
+A React-based movie search application using OMDB API.  
+Users can search movies and view details in card format.
+
+---
+
+## 🚀 Features
+- Search movies by name
+- Display movie cards dynamically
+- API integration using Axios
+- Responsive UI
+
+---
+
+## 📸 Screenshots
+
+### Home Page
+![Home](./screenshots/home.png)
+
+### Search Results
+![Search](./screenshots/search.png)
+
+### Movie View
+![Movie](./screenshots/result.png)
+
+---
+
+## 🛠️ Tech Stack
+- React JS
+- Axios
+- CSS
+- OMDB API
+
+---
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
