@@ -1,74 +1,61 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./App.css";
 
-export default function App() {
-  const [search, setSearch] = useState("");
+function App() {
+  const [movies, setMovies] = useState([]);
+  const [search, setSearch] = useState("Avengers");
+  const [loading, setLoading] = useState(false);
 
-  const movies = [
-    {
-      id: 1,
-      title: "Interstellar",
-      genre: "Sci-Fi",
-      rating: 4.8,
-      image:
-        "https://via.placeholder.com/300x450?text=Interstellar",
-    },
-    {
-      id: 2,
-      title: "Joker",
-      genre: "Drama",
-      rating: 4.7,
-      image:
-        "https://via.placeholder.com/300x450?text=Joker",
-    },
-    {
-      id: 3,
-      title: "Avatar",
-      genre: "Fantasy",
-      rating: 4.6,
-      image:
-        "https://via.placeholder.com/300x450?text=Avatar",
-    },
-  ];
+  const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
 
-  const filteredMovies = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const fetchMovies = async () => {
+    setLoading(true);
+
+    const response = await axios.get(
+      `https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}`
+    );
+
+    if (response.data.Search) {
+      setMovies(response.data.Search);
+    }
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>Movie Recommendation App</h1>
+    <div className="app">
+      <h1>Movie Listing App</h1>
 
       <input
         type="text"
         placeholder="Search movies..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        style={{ padding: "10px", width: "250px", marginBottom: "20px" }}
       />
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "20px" }}>
-        {filteredMovies.map((movie) => (
-          <div key={movie.id} style={{ border: "1px solid #ccc", padding: "15px", borderRadius: "10px" }}>
-            <img
-              src={movie.image}
-              alt={movie.title}
-              style={{
-                width: "100%",
-                height: "300px",
-                objectFit: "cover",
-                borderRadius: "10px",
-                display: "block",
-              }}
-            />
+      <button onClick={fetchMovies}>Search</button>
 
-            <h2>{movie.title}</h2>
-            <p>{movie.genre}</p>
-            <p>⭐ {movie.rating}</p>
+      {loading && <h2>Loading...</h2>}
 
-            <button>Add to Watchlist</button>
+      <div className="movie-container">
+        {movies.map((movie) => (
+          <div className="movie-card" key={movie.imdbID}>
+            <img src={movie.Poster} alt={movie.Title} />
+
+            <div className="movie-info">
+              <h3>{movie.Title}</h3>
+              <p>{movie.Year}</p>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
 }
+
+export default App;
