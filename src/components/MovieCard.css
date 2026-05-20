@@ -1,65 +1,56 @@
 .movie-card {
-  width: 300px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  border-radius: 18px;
-  overflow: hidden;
-  color: white;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  transition: all 0.4s ease;
+  background-color: white;
+  color: black;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
 }
 
 .movie-card:hover {
-  transform: translateY(-10px) scale(1.03);
+  transform: scale(1.05);
 }
 
-.movie-image {
+.movie-card img {
   width: 100%;
-  height: 420px;
+  height: 300px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
-.movie-content {
-  padding: 20px;
+.movie-card h2 {
+  color: black;
 }
 
-.movie-content h2 {
-  margin-bottom: 10px;
-  color: #222;
-}
-
-.description {
-  font-size: 14px;
-  line-height: 1.5;
-  color: #444;
-}
-
-.movie-content p {
+.movie-card p {
   color: #333;
 }
 
-button {
-  margin-top: 15px;
-  padding: 12px 18px;
+.rating {
+  background: gold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.movie-card button {
+  margin-top: 12px;
+  padding: 8px 14px;
   border: none;
-  border-radius: 30px;
-  background: #ff4b2b;
+  background-color: black;
   color: white;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 15px;
-  transition: 0.3s;
 }
 
-button:hover {
-  background: #ff416c;
+.dark .movie-card {
+  background-color: #1e1e1e;
+  color: white;
 }
 
-@media (max-width: 768px) {
-  .heading {
-    font-size: 32px;
-  }
-
-  .movie-card {
-    width: 90%;
-  }
+.dark .movie-card h2,
+.dark .movie-card p {
+  color: white;
 }
